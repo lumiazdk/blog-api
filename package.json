@@ -1,0 +1,39 @@
+{
+  "name": "koajs",
+  "version": "1.0.0",
+  "description": "以koajs为后端框架的项目",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon  app.js"
+  },
+  "keywords": [
+    "koajs"
+  ],
+  "author": "朱定坤",
+  "license": "ISC",
+  "dependencies": {
+    "ajv-errors": "^1.0.1",
+    "captchapng": "^0.0.1",
+    "cheerio": "^1.0.0-rc.2",
+    "iconv-lite": "^0.4.24",
+    "jwt-simple": "^0.5.5",
+    "koa": "^2.6.2",
+    "koa-better-body": "^3.0.4",
+    "koa-compress": "^3.0.0",
+    "koa-convert": "^1.2.0",
+    "koa-jwt": "^3.5.1",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
+    "koa-static-cache": "^5.1.2",
+    "moment": "^2.23.0",
+    "mysql-pro": "^1.0.1",
+    "mysql2": "^1.6.5",
+    "request": "^2.88.0",
+    "sequelize": "^5.2.7",
+    "superagent": "^4.1.0",
+    "superagent-charset": "^1.2.0",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {}
+}

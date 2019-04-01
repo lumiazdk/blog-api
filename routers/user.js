@@ -26,17 +26,30 @@ router.post('upload', (ctx) => {
 //注册
 router.post('register', async ctx => {
 
-    let { phone, password, motto = '这个人很懒，什么都没留下' } = ctx.request.fields ? ctx.request.fields : {}
+    let {
+        phone,
+        password,
+        motto = '这个人很懒，什么都没留下'
+    } = ctx.request.fields ? ctx.request.fields : {}
     const user_name = `用户${uuid.v1().split('-')[0]}`
     const photoPath = `http://${global.ip}:${global.port}/photo.jpeg`
     let body = ctx.request.fields ? ctx.request.fields : {}
+    console.log(body)
     let schema = {
-        phone: { type: "required", reg: /^1[34578]\d{9}$/, message: '手机号有误' },
-        password: { type: "required" },
+        phone: {
+            type: "required",
+            reg: /^1[34578]\d{9}$/,
+            message: '手机号有误'
+        },
+        password: {
+            type: "required"
+        },
     }
     let errors = ctx.json_schema(body, schema)
     if (errors) {
-        ctx.results.jsonErrors({ errors })
+        ctx.results.jsonErrors({
+            errors
+        })
         return
     }
     //处理密码
@@ -49,7 +62,13 @@ router.post('register', async ctx => {
     if (ishave.length > 0) {
         ctx.results.error('此用户已注册')
     } else {
-        let newUser = await usersModal.create({ phone: phone, password: md5, motto: motto, name: user_name, photoPath: photoPath })
+        let newUser = await usersModal.create({
+            phone: phone,
+            password: md5,
+            motto: motto,
+            name: user_name,
+            photoPath: photoPath
+        })
         let payload = {
             exp: Date.now() + tokenExpiresTime,
             phone: phone
@@ -58,22 +77,35 @@ router.post('register', async ctx => {
         let userInfo = JSON.parse(JSON.stringify(newUser))
         delete userInfo.password
         ctx.results.success({
-            token, user: userInfo
+            token,
+            user: userInfo
         })
     }
 });
 
 //登陆
 router.post('login', async ctx => {
-    const { phone, password, captcha } = ctx.request.fields ? ctx.request.fields : {}
+    const {
+        phone,
+        password,
+        captcha
+    } = ctx.request.fields ? ctx.request.fields : {}
     let body = ctx.request.fields ? ctx.request.fields : {}
     let schema = {
-        phone: { type: "required", reg: /^1[34578]\d{9}$/, message: '手机号有误' },
-        password: { type: "required" },
+        phone: {
+            type: "required",
+            reg: /^1[34578]\d{9}$/,
+            message: '手机号有误'
+        },
+        password: {
+            type: "required"
+        },
     }
     let errors = ctx.json_schema(body, schema)
     if (errors) {
-        ctx.results.jsonErrors({ errors })
+        ctx.results.jsonErrors({
+            errors
+        })
         return
     }
     //判断验证码
@@ -107,7 +139,8 @@ router.post('login', async ctx => {
             let userInfo = JSON.parse(JSON.stringify(ishave[0]))
             delete userInfo.password
             ctx.results.success({
-                token, user: userInfo
+                token,
+                user: userInfo
             })
         } else {
             ctx.results.error('密码错误！')
@@ -117,7 +150,9 @@ router.post('login', async ctx => {
 //用户列表
 router.get('getUsers', async ctx => {
     let users = await usersModal.findAll();
-    ctx.results.success({ data: users })
+    ctx.results.success({
+        data: users
+    })
 })
 //图片验证码
 router.post('getCaptchas', async ctx => {
@@ -126,7 +161,10 @@ router.post('getCaptchas', async ctx => {
     p.color(0, 0, 0, 0);
     p.color(80, 80, 80, 255);
     const base64 = p.getBase64();
-    ctx.cookies.set('captcha', cap, { maxAge: 360000, httpOnly: true });
+    ctx.cookies.set('captcha', cap, {
+        maxAge: 360000,
+        httpOnly: true
+    });
     ctx.status = 200
     ctx.body = {
         code: 'data:image/png;base64,' + base64

@@ -11,8 +11,7 @@ module.exports = function likes(sequelize) {
             allowNull: false
         },
     }, {
-            // options
-        });
+        // options
+    });
     return Like
 }
-

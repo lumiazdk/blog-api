@@ -23,8 +23,7 @@ module.exports = function users(sequelize) {
             allowNull: true
         }
     }, {
-            // options
-        });
+        // options
+    });
     return User
 }
-

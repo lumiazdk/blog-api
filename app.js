@@ -16,13 +16,18 @@ const path = require('path')
 const sequelize = require('./libs/db');
 
 //compress
-const options = { threshold: 1024, flush: require('zlib').Z_SYNC_FLUSH };
+const options = {
+    threshold: 1024,
+    flush: require('zlib').Z_SYNC_FLUSH
+};
 global.port = 8080;
-if (getIPAdress() == '192.168.0.10') {
-    global.ip = '192.168.0.10'
-} else {
-    global.ip = '47.244.57.219'
-}
+// if (getIPAdress() == '192.168.0.10') {
+//     global.ip = '192.168.0.10'
+// } else {
+//     global.ip = '47.244.57.219'
+// }
+global.ip = '192.168.101.183'
+
 function getIPAdress() {
     var interfaces = require('os').networkInterfaces();
     for (var devName in interfaces) {
@@ -42,7 +47,8 @@ const host = getIPAdress()
 //router
 let mainRouter = new Router();
 mainRouter.use('/', require('./routers/user'));
-
+mainRouter.use('/', require('./routers/post'));
+mainRouter.use('/', require('./routers/message'));
 
 
 
@@ -67,7 +73,9 @@ app.use(async (ctx, next) => {
         success(value, message = '成功') {
             ctx.body = {
                 code: 1,
-                result: { ...value },
+                result: {
+                    ...value
+                },
                 message: message
             }
         },
@@ -80,14 +88,16 @@ app.use(async (ctx, next) => {
         jsonErrors(value, message = '数据验证失败') {
             ctx.body = {
                 code: -104,
-                result: { ...value },
+                result: {
+                    ...value
+                },
                 message: message
             }
         }
     }
     ctx.json_schema = json_schema
     ctx.results = results;
-    
+
     await next()
 });
 
@@ -112,13 +122,11 @@ app.use(function (ctx, next) {
 });
 
 
-app.use(convert(koaBetterBody(
-    {
-        uploadDir: config.uploadDir,
-        keepExtensions: true
+app.use(convert(koaBetterBody({
+    uploadDir: config.uploadDir,
+    keepExtensions: true
 
-    }
-)))
+})))
 app.use(mainRouter.routes())
 
 

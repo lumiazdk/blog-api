@@ -2,11 +2,7 @@ const Sequelize = require('sequelize');
 
 module.exports = function comments(sequelize) {
     const Comment = sequelize.define('Comment', {
-        userId: {
-            type: Sequelize.INTEGER,
-            allowNull: false
-        },
-        ctUserId: {
+        postId: {
             type: Sequelize.INTEGER,
             allowNull: false
         },
@@ -15,8 +11,7 @@ module.exports = function comments(sequelize) {
             allowNull: false
         },
     }, {
-            // options
-        });
+        // options
+    });
     return Comment
 }
-

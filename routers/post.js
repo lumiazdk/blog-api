@@ -8,10 +8,9 @@ const commentsModal = require('../modal/comments')(sequelize)
 router.post('addPost', async ctx => {
     let {
         title,
-        userId,
         content,
         readNum = 0,
-        type,
+        type = 0,
         tag,
         background,
         like = 0
@@ -21,43 +20,32 @@ router.post('addPost', async ctx => {
         title: {
             type: "required"
         },
-        userId: {
-            type: "required"
-        },
         content: {
             type: "required"
         },
-        readNum: {
-            type: "required"
-        },
-        type: {
-            type: "required"
-        },
+
         tag: {
             type: "required"
         },
         background: {
             type: "required"
         },
-        like: {
-            type: "required"
-        },
+
     }
-    if (background) {
-        background = `http://${global.ip}:${global.port}/upload_${ctx.request.files[0].path.split('upload_').reverse()[0]}`
-    }
+
     let errors = ctx.json_schema(body, schema)
     console.log(errors)
     if (errors) {
         ctx.results.jsonErrors({
             errors
         })
+        
+
         return
     }
     await postsModal.create({
         title: title,
         content: content,
-        userId: userId,
         readNum: readNum,
         type: type,
         tag: tag,

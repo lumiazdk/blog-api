@@ -20,7 +20,7 @@ const options = {
     threshold: 1024,
     flush: require('zlib').Z_SYNC_FLUSH
 };
-global.port = 8080;
+global.port = 8000;
 // if (getIPAdress() == '192.168.0.10') {
 //     global.ip = '192.168.0.10'
 // } else {
@@ -49,6 +49,8 @@ let mainRouter = new Router();
 mainRouter.use('/', require('./routers/user'));
 mainRouter.use('/', require('./routers/post'));
 mainRouter.use('/', require('./routers/message'));
+mainRouter.use('/', require('./routers/upload'));
+
 
 
 

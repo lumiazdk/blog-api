@@ -6,12 +6,8 @@ module.exports = function posts(sequelize) {
             type: Sequelize.STRING,
             allowNull: false
         },
-        userId: {
-            type: Sequelize.INTEGER,
-            allowNull: false
-        },
         content: {
-            type: Sequelize.STRING,
+            type: Sequelize.TEXT,
             allowNull: false
         },
         readNum: {
@@ -27,7 +23,7 @@ module.exports = function posts(sequelize) {
             allowNull: false
         },
         background: {
-            type: Sequelize.STRING,
+            type: Sequelize.JSON,
             allowNull: false
         },
         tag: {
@@ -36,8 +32,7 @@ module.exports = function posts(sequelize) {
         },
 
     }, {
-            // options
-        });
+        // options
+    });
     return Post
 }
-

@@ -30,6 +30,10 @@ module.exports = function posts(sequelize) {
             type: Sequelize.STRING,
             allowNull: false
         },
+        introduction: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
 
     }, {
         // options

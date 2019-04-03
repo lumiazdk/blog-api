@@ -13,7 +13,8 @@ router.post('addPost', async ctx => {
         type = 0,
         tag,
         background,
-        like = 0
+        like = 0,
+        introduction
     } = ctx.request.fields ? ctx.request.fields : {}
     let body = ctx.request.fields ? ctx.request.fields : {}
     let schema = {
@@ -30,6 +31,9 @@ router.post('addPost', async ctx => {
         background: {
             type: "required"
         },
+        introduction: {
+            type: "required"
+        },
 
     }
 
@@ -39,7 +43,7 @@ router.post('addPost', async ctx => {
         ctx.results.jsonErrors({
             errors
         })
-        
+
 
         return
     }
@@ -50,7 +54,8 @@ router.post('addPost', async ctx => {
         type: type,
         tag: tag,
         background: background,
-        like: like
+        like: like,
+        introduction: introduction
     })
     ctx.results.success({})
 });

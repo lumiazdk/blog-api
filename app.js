@@ -50,6 +50,8 @@ mainRouter.use('/', require('./routers/user'));
 mainRouter.use('/', require('./routers/post'));
 mainRouter.use('/', require('./routers/message'));
 mainRouter.use('/', require('./routers/upload'));
+mainRouter.use('/', require('./routers/banner'));
+
 
 
 

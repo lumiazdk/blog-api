@@ -5,6 +5,8 @@ const users = require('../modal/users.js')
 const posts = require('../modal/posts.js')
 const comments = require('../modal/comments.js')
 const messages = require('../modal/messages.js')
+const banners = require('../modal/banners.js')
+
 
 
 
@@ -22,6 +24,8 @@ users(sequelize)
 posts(sequelize)
 comments(sequelize)
 messages(sequelize)
+banners(sequelize)
+
 
 
 

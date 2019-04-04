@@ -90,6 +90,18 @@ router.post('getPost', async ctx => {
         data: posts
     })
 });
+router.post('getRecommend', async ctx => {
+
+    let posts = await postsModal.findAll({
+        limit: 2,
+        'order': [
+            ['like', 'DESC'],
+        ]
+    })
+    ctx.results.success({
+        data: posts
+    })
+});
 //编辑博文
 router.post('editPost', async ctx => {
     let {

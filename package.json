@@ -30,7 +30,7 @@
     "mysql-pro": "^1.0.1",
     "mysql2": "^1.6.5",
     "request": "^2.88.0",
-    "sequelize": "^5.2.7",
+    "ç": "^5.2.7",
     "superagent": "^4.1.0",
     "superagent-charset": "^1.2.0",
     "uuid": "^3.3.2"

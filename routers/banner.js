@@ -113,7 +113,7 @@ router.post('delBanner', async ctx => {
         })
         return
     }
-    let posts = await postsModal.destroy({
+    let posts = await bannersModal.destroy({
         where: {
             id: id
         }

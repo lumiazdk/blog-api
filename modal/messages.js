@@ -10,8 +10,12 @@ module.exports = function Message(sequelize) {
             type: Sequelize.STRING,
             allowNull: false
         },
+        email: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
     }, {
-            // options
-        });
+        // options
+    });
     return Message
 }
